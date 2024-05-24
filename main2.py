@@ -82,7 +82,7 @@ def save_to_csv(data, filename):
 def main():
     base_url = 'https://judgment.judicial.gov.tw/FJUD/default.aspx'
     details_base_url = 'https://judgment.judicial.gov.tw/FJUD/'
-    search_url_template = 'https://judgment.judicial.gov.tw/FJUD/qryresultlst.aspx?q=97a3133e4bc68c7ff78ce96657e66c64&sort=DS&page={page}&ot=in'
+    search_url_template = 'https://judgment.judicial.gov.tw/FJUD/qryresultlst.aspx?q=5d63ee80ef770fe2b26ab2630488e749&sort=DS&page={page}&ot=in'
 
     initial_content = fetch_page(base_url)
     if not initial_content:
@@ -98,7 +98,7 @@ def main():
         '__VIEWSTATE': viewstate,
         '__VIEWSTATEGENERATOR': viewstategenerator,
         '__EVENTVALIDATION': eventvalidation,
-        'txtKW': '賠償&工期&延遲&心證&逾期&建',
+        'txtKW': '違約金',
         'judtype': 'JUDBOOK',
         'whosub': '0',
         'ctl00$cp_content$btnSimpleQry': '送出查詢'
@@ -115,7 +115,7 @@ def main():
         print("Failed to fetch the iframe content.")
         return
 
-    with open('debug_iframe_content.html', 'w', encoding='utf-8') as file:
+    with open('debug_iframe_content_2.html', 'w', encoding='utf-8') as file:
         file.write(current_page_content)
 
     fetched_count = 0
@@ -124,14 +124,14 @@ def main():
     retry_wait_time = 10  # 10 seconds
     output_file = 'judgment_data.csv'
 
-    while fetched_count < 100:
+    while fetched_count < 200:
         page_data, links = parse_results_page(current_page_content)
         if not page_data or not links:
             print("Failed to parse the results page.")
             break
 
         for index, link in enumerate(links):
-            if fetched_count >= 100:
+            if fetched_count >= 200:
                 break
             detail_url = details_base_url + link
             print(f"Fetching detail page: {detail_url}")
@@ -166,7 +166,7 @@ def main():
             print("Failed to fetch the next page after several attempts. Exiting...")
             break
 
-        with open(f'debug_page_{fetched_count}.html', 'w', encoding='utf-8') as file:
+        with open(f'debug_page_{fetched_count}_2.html', 'w', encoding='utf-8') as file:
             file.write(current_page_content)
 
 
