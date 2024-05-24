@@ -82,7 +82,7 @@ def save_to_csv(data, filename):
 def main():
     base_url = 'https://judgment.judicial.gov.tw/FJUD/default.aspx'
     details_base_url = 'https://judgment.judicial.gov.tw/FJUD/'
-    search_url_template = 'https://judgment.judicial.gov.tw/FJUD/qryresultlst.aspx?q=5d63ee80ef770fe2b26ab2630488e749&sort=DS&page={page}&ot=in'
+    search_url_template = 'https://judgment.judicial.gov.tw/FJUD/qryresultlst.aspx?q=dbd2b7b8c6282852972ea728025a1297&sort=DS&page={page}&ot=in'
 
     initial_content = fetch_page(base_url)
     if not initial_content:
@@ -98,7 +98,7 @@ def main():
         '__VIEWSTATE': viewstate,
         '__VIEWSTATEGENERATOR': viewstategenerator,
         '__EVENTVALIDATION': eventvalidation,
-        'txtKW': '違約金',
+        'txtKW': '工程契約&(懲罰性違約金+損害賠償性違約金)',
         'judtype': 'JUDBOOK',
         'whosub': '0',
         'ctl00$cp_content$btnSimpleQry': '送出查詢'
@@ -122,7 +122,7 @@ def main():
     page_number = 1
     retry_attempts = 3
     retry_wait_time = 10  # 10 seconds
-    output_file = 'judgment_data.csv'
+    output_file = 'judgment_data_2.csv'
 
     while fetched_count < 200:
         page_data, links = parse_results_page(current_page_content)
