@@ -119,7 +119,7 @@ def main():
         file.write(current_page_content)
 
     fetched_count = 0
-    page_number = 1
+    page_number = 12
     retry_attempts = 3
     retry_wait_time = 10  # 10 seconds
     output_file = 'judgment_data_2.csv'
