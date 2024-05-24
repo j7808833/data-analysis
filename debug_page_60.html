@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <meta property="og:image" content="https://judgment.judicial.gov.twfblogo.png">
+    <title>
+	查詢結果列表
+</title><link rel="stylesheet" href="../css/bootstrap.min.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/iframe.css" />
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>    
+    <script type="text/javascript" src="/js/isMobile.js"></script>
+    <!--引用司法院內網的網頁字型 javascript -->
+    <script type="text/javascript" src="https://tpjwebfont2.judicial.gov.tw/WebFont/cmexwebfont.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100643133-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-100643133-1');
+    </script>
+
+    <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-NB3N15LK5E"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-NB3N15LK5E'); </script>		
+	
+    
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="../css/result.css">
+    <link rel="stylesheet" href="../css/pagination.css">
+    <script>
+        $(document).ready(function () {
+            subset(".tdCut", "sung");
+        });
+        function cookieId(id, ro, q, gy, gc, sort, jt) {
+            document.cookie = "FJUEQRYParamsCookie_out=id=" + id + "&q=" + q + "&gy=" + gy + "&gc=" + gc + "&sort=" + sort + "&ro=" + ro  + "&jt=" + jt + ";";//domain=law.intraj;secure;
+        }
+    </script>
+</head>
+<body>
+    <form method="post" action="./qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=4&amp;ot=in" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="6Sy0laL6g6Y18ONr7dTyX1AMnRffQlxGPUMQRG7BrXMDkizv/S08ysO4jlKU4BhRC6YOTw==" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="71F44E97" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="4R493UXR8Yo3EcklrWHyxWHEtVgrpXjuk9jW6sMtQOV5N8hxpGKdPYxeHEdVnGeNWH3x0hP45jX7OlvnU6zsMGHBWYo04Ga9ZzZuKZgUzpn3r27oPQF704GJ4593YRt6mtOmHWMbf/VeqN9Sw5YbHcTVg0D36rYpCqOYsK4paj2SQ6IaKogSbMWWjmJHcwtTN4vNuG9urOY45lZlTgmKxWr5aaMeVK3XyEhPrCoKQn4BRgw7fjSuqT5cyYCT9wMdbgNoXqKnd9LspU02G1bFMQdKRkRfXA4uC/NdFWMMwutshpzhsPCrYE/tsoGm2+AL9AV0uBcHwEGlsnYC68cqtupi8z/zI6bclB/Tpisns6NrgixCC6fDDcM9TZ1IeQho6A6Iy4/2RC4asBfBDmdg9rnrF2zUZASQT3ZJ83gO6ON965MAnAQg1Zg4/keMhafylWwAI7cRSLsouga0b7A4mc7qMZHYTvTrthEKe3QRBmD9FGHlp35GzrMYkECy3gkFchIY9T0DLPZhDMFOUt5tmvKoCgf6/lZfWq5XZ8J1Fd+Wjbsf6A9EM2eeyjURleEcSobF1zFePwulRm4G7PGN0K6AjYOshsxtuojAkc05N3kX9OzqITB4JYBgxcS46TRNSJOjt21KArjBzYLiNGL2WfmO/GiEsgxi3q3W5EuHG+EVnHvJGDiNlVX/HDAzc7aNihe9SGL8kBkGPOl2oCfGIgA1AwbdsFfNCHKJMyA9ZXe3u2ynkxXXJKDV5/E/MdRztf+H/wrbS1oGhJZLRbViXf3eDNaIm/9NFLydiORhCXxXgQX0xA7nNuyPLSaxvyayElZZLi+cWQgqDu6SRlHKdcg2O3YSI3xU/m4PT8RnqQOf1rxVm0GowNWJ4hxttJiMwwOVrFPeSUb1ri0FGABAl5CUQmc9X3yTeYgfDe/lV/F1Hm7UVMHFUp5AFZ9gNc0e79WCbwwX8hmnTcq9R+iITPpL3GfCbDxTPv1zN5+4wcXnCDLsgxH8qyLMXHvZsLpRcvnxmLW1J0Hm3wdF7A/FBtVdOqOdxDN74gYdLFitqAZYBkvmthYwiqhSnSBP+xLBEQAYdr/nNBOeyz6CuteRiLx1RIF0mu0SXtC2kKguBU9LzR6N" />
+</div>
+    <div class="container">
+        <h1 style="display:none"></h1>
+        
+    <div class="result-list">
+        <div class="result-heading">
+            <div class="result-title">查詢結果列表</div>
+            <a href="#" id="closeCut" class="btn btn-basic memoBtn">隱藏摘要</a>
+        </div>
+        <div id="plOverCount" class="bg-danger text-danger text-center">
+	
+            <i class="fa fa-exclamation-circle fa-fw"></i> 本次查詢結果超出 500 筆，只顯示前 500 筆
+        
+</div>
+        <div class="list-pager">
+            <div class="dropdown pull-left">
+                排序：<button class="btn btn-default btn-xs" type="button" id="dropdown-menu-sort" data-toggle="dropdown">
+				    日期新到舊
+				    <i class="fa fa-sort"></i>
+			    </button>
+			    <ul class="dropdown-menu">
+                    <li><a href="qryresultlst.aspx?sort=DS">裁判日期新到舊</a></li>
+                    <li><a href="qryresultlst.aspx?sort=DB">裁判日期舊到新</a></li>
+                    <li><a href="qryresultlst.aspx?sort=LG" class="courtsort">法院層級大到小</a></li>
+                    <li><a href="qryresultlst.aspx?sort=LB" class="courtsort">法院層級小到大</a></li><!--公示催告、簡易案件沒有法院層級分別(都是地院)-->
+                    <li><a href="qryresultlst.aspx?sort=KG">裁判大小大到小</a></li>
+                    <li><a href="qryresultlst.aspx?sort=KB">裁判大小小到大</a></li>
+			    </ul>
+            </div>
+            
+<script type="text/javascript">
+    function GoPage(ddl) {
+        location.href = ddl.value;
+    }
+</script>
+<div id="plPager" class="pull-right">
+	
+	<span>共 731 筆 . 現在第 4 / 37 頁</span>
+    <span>
+	    <a id="hlFirst" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=1">第一頁</a>
+        <a id="hlPriv" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=3">上一頁</a>
+        <a id="hlNext" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=5">下一頁</a>
+        <a id="hlLast" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=37">最末頁</a>
+	跳至
+        <select name="ctl00$cp_content$ucPagerTop$ddlPage" id="ddlPage" class="btn btn-default btn-xs" onchange="GoPage(this)">
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=1">1</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=2">2</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=3">3</option>
+		<option selected="selected" value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=4">4</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=5">5</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=6">6</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=7">7</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=8">8</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=9">9</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=10">10</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=11">11</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=12">12</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=13">13</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=14">14</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=15">15</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=16">16</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=17">17</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=18">18</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=19">19</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=20">20</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=21">21</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=22">22</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=23">23</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=24">24</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=25">25</option>
+
+	</select>
+頁
+    </span>
+
+</div>
+<div class="clearfix"></div>
+        </div>
+        
+            <table id="jud" class="jub-table">
+                <tr>
+                    <th>序號</th>
+                    <th>裁判字號 （內容大小）</th>
+                    <th>裁判日期 </th>
+                    <th>裁判案由 </th>
+                </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">61.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TNHV%2c109%2c%e4%b8%8a%2c370%2c20220609%2c2&#39;,&#39;60&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TNHV%2c109%2c%e4%b8%8a%2c370%2c20220609%2c2&#39;,&#39;60&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TNHV%2c109%2c%e4%b8%8a%2c370%2c20220609%2c2&amp;ot=in">臺灣高等法院 臺南分院 109 年度 上 字第 370 號民事判決</a>（40K）</td>
+                <td>111.06.09</td>
+                <td width="30%">履行契約</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...損害賠償－包括不得依系爭契約第11條第2項行使請求遲延利息之權利。⑶次按違約金係當事人約定契約不履行時，債務人應支付之懲罰金或損害<span class="highlight">賠償</span>額之預定，以確保債務之履行為目的。至若當事人約定一方解除契約時，應支付他方相當之金額，則以消滅契約為目的，屬保留解除權之代價，兩者...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">62.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TCHV%2c111%2c%e5%bb%ba%e4%b8%8a%e6%9b%b4%e4%b8%80%2c6%2c20220531%2c1&#39;,&#39;61&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TCHV%2c111%2c%e5%bb%ba%e4%b8%8a%e6%9b%b4%e4%b8%80%2c6%2c20220531%2c1&#39;,&#39;61&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TCHV%2c111%2c%e5%bb%ba%e4%b8%8a%e6%9b%b4%e4%b8%80%2c6%2c20220531%2c1&amp;ot=in">臺灣高等法院 臺中分院 111 年度 建上更一 字第 6 號民事判決</a>（16K）</td>
+                <td>111.05.31</td>
+                <td width="30%">請求給付工程款</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...賠償責任上限金額內（見原審卷㈠第26頁），兩造對於上開違約金之性質為損害賠償額之預定乙節亦不爭執，堪予認定。上開違約金條款既係損害<span class="highlight">賠償</span>額之預定，依上開說明，即應以被上訴人所受損害及所失利益為主要考量因素之一。查系爭工程為學員宿舍整建工程，依據被上訴人所陳學員宿舍整...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">63.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;HLDV%2c110%2c%e9%87%8d%e8%a8%b4%2c26%2c20220531%2c1&#39;,&#39;62&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;HLDV%2c110%2c%e9%87%8d%e8%a8%b4%2c26%2c20220531%2c1&#39;,&#39;62&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=HLDV%2c110%2c%e9%87%8d%e8%a8%b4%2c26%2c20220531%2c1&amp;ot=in">臺灣花蓮地方法院 110 年度 重訴 字第 26 號民事判決</a>（32K）</td>
+                <td>111.05.31</td>
+                <td width="30%">返還價金等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...約解除之效力。故原告依買賣契約第7條約定解除契約，並依該條約定及民法第259條第2款規定請求被告返還已付價金700萬元，及請求被告<span class="highlight">賠償</span>已付價款同額之違約金700萬元，難認有理。六、從而，原告依買賣契約第7條、民法第259條第2款規定請求如其訴之聲明，為無理由，應併...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">64.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPDV%2c103%2c%e5%bb%ba%2c430%2c20220531%2c1&#39;,&#39;63&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPDV%2c103%2c%e5%bb%ba%2c430%2c20220531%2c1&#39;,&#39;63&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPDV%2c103%2c%e5%bb%ba%2c430%2c20220531%2c1&amp;ot=in">臺灣臺北地方法院 103 年度 建 字第 430 號民事判決</a>（74K）</td>
+                <td>111.05.31</td>
+                <td width="30%">給付工程款</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...79條，請求被告給付返還遭扣之工程款2,716萬0,490元，要屬無據。⒎至原告另主張因被告實際上未因遲延而受有損失，被告請求原告<span class="highlight">賠償</span>至違約金額度上限即契約總價20％，並非公允，應另按民法第251條、第252條規定予以酌減云云。經查：⑴按債務已為一部履行者，法院得...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">65.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TCDV%2c109%2c%e9%87%8d%e8%a8%b4%2c93%2c20220527%2c1&#39;,&#39;64&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TCDV%2c109%2c%e9%87%8d%e8%a8%b4%2c93%2c20220527%2c1&#39;,&#39;64&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TCDV%2c109%2c%e9%87%8d%e8%a8%b4%2c93%2c20220527%2c1&amp;ot=in">臺灣臺中地方法院 109 年度 重訴 字第 93 號民事判決</a>（74K）</td>
+                <td>111.05.27</td>
+                <td width="30%">給付服務費用</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...章項目之契約價金應百分之百減價，並處以減價金額6倍之違約金，但以該項目之契約價金為限。故被告應得向中興公司請求53萬1,193元之<span class="highlight">賠償</span>。原告亦未否認就上開情事有履約管理不實之情形，則被告依系爭專案管理契約第14條第3項第5款約定，向原告計罰10萬6,239元（計算...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">66.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;SCDV%2c110%2c%e5%bb%ba%2c15%2c20220520%2c1&#39;,&#39;65&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;SCDV%2c110%2c%e5%bb%ba%2c15%2c20220520%2c1&#39;,&#39;65&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=SCDV%2c110%2c%e5%bb%ba%2c15%2c20220520%2c1&amp;ot=in">臺灣新竹地方法院 110 年度 建 字第 15 號民事判決</a>（15K）</td>
+                <td>111.05.20</td>
+                <td width="30%">給付違約金</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...行者，法院得比照債權人因一部履行所受之利益，減少違約金，民法第252條、第251條定有明文。此處之違約金，不問其作用為懲罰抑為損害<span class="highlight">賠償</span>額之預定，倘有過高，均有上開規定之適用。又違約金之約定，乃基於個人自主意思之發展、自我決定及自我拘束所形成之當事人間之規範，本諸契...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">67.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPDV%2c109%2c%e5%bb%ba%2c324%2c20220429%2c1&#39;,&#39;66&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPDV%2c109%2c%e5%bb%ba%2c324%2c20220429%2c1&#39;,&#39;66&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPDV%2c109%2c%e5%bb%ba%2c324%2c20220429%2c1&amp;ot=in">臺灣臺北地方法院 109 年度 建 字第 324 號民事判決</a>（16K）</td>
+                <td>111.04.29</td>
+                <td width="30%">損害賠償等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...定期限內完工，每延遲完工一天，需扣本原始簽約之合約工程總價千分之一之金額，延遲完工兩天（2天*千分之一）以此類推，以工作天數計算，<span class="highlight">賠償</span>金總額不得超過此合約總工程款的百分之十。…」（見新北院卷第19、23頁）系爭工程於109年7月21日開工，為兩造所不爭執（見本院卷...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">68.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPHV%2c109%2c%e9%87%8d%e4%b8%8a%2c368%2c20220422%2c1&#39;,&#39;67&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPHV%2c109%2c%e9%87%8d%e4%b8%8a%2c368%2c20220422%2c1&#39;,&#39;67&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPHV%2c109%2c%e9%87%8d%e4%b8%8a%2c368%2c20220422%2c1&amp;ot=in">臺灣高等法院 109 年度 重上 字第 368 號民事判決</a>（55K）</td>
+                <td>111.04.22</td>
+                <td width="30%">給付工程款</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...過高情事，法院即得依 此規定核減至相當之數額，此項核減，法院得以職權為 之，亦得由債務人訴請法院核減，且不論係懲罰性違約 金或損害<span class="highlight">賠償</span>額預定性違約金均有適用。另契約當事人 約定之違約金是否相當，須依一般客觀事實，社會經濟 狀況、當事人所受損害情形，及債務人若能如期...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">69.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPDV%2c111%2c%e5%bb%ba%2c2%2c20220419%2c1&#39;,&#39;68&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPDV%2c111%2c%e5%bb%ba%2c2%2c20220419%2c1&#39;,&#39;68&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPDV%2c111%2c%e5%bb%ba%2c2%2c20220419%2c1&amp;ot=in">臺灣臺北地方法院 111 年度 建 字第 2 號民事判決</a>（19K）</td>
+                <td>111.04.19</td>
+                <td width="30%">給付工程款等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...情節，衡諸常理即難認被告之舉合致於系爭契約第10條第1項所定「無故」為之的要件，從而原告依此約款主張被告無故另行招商發包工程而請求<span class="highlight">賠償</span>違約金118萬2000元，自屬無理。㈡原告主張被告尚餘工程款15萬8000元未給付部分：⒈按當事人主張有利於己之事實者，就其事實有...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">70.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPHM%2c106%2c%e9%87%91%e4%b8%8a%e9%87%8d%e8%a8%b4%2c25%2c20220408%2c5&#39;,&#39;69&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPHM%2c106%2c%e9%87%91%e4%b8%8a%e9%87%8d%e8%a8%b4%2c25%2c20220408%2c5&#39;,&#39;69&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPHM%2c106%2c%e9%87%91%e4%b8%8a%e9%87%8d%e8%a8%b4%2c25%2c20220408%2c5&amp;ot=in">臺灣高等法院 106 年度 金上重訴 字第 25 號刑事判決</a>（1374K）</td>
+                <td>111.04.08</td>
+                <td width="30%">貪污治罪條例等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...認：修法理由對非身分公務員之職能性公務員，即授權公務員、委託公務員，所指「從事法定之公共事務」、「公務上之權力」等字詞，並參照國家<span class="highlight">賠償</span>法有關行政委託之界定，所稱公共事務或公務權力，除所從事者為公權力行政高權行政外，有包括部分之給付行政在內，並以攸關國計民生等民眾依...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">71.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TYDV%2c109%2c%e5%bb%ba%2c50%2c20220318%2c1&#39;,&#39;70&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TYDV%2c109%2c%e5%bb%ba%2c50%2c20220318%2c1&#39;,&#39;70&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TYDV%2c109%2c%e5%bb%ba%2c50%2c20220318%2c1&amp;ot=in">臺灣桃園地方法院 109 年度 建 字第 50 號民事判決</a>（23K）</td>
+                <td>111.03.18</td>
+                <td width="30%">給付工程款</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...免為假執行。三、得心證之理由：按債務人因債務不履行，致債權人之人格權受侵害者，準用第192條至第195條及第197條之規定，負損害<span class="highlight">賠償</span>責任，民法第227條之1定有明文。查兩造不爭執盧采葳是代表三豐生醫有限公司簽訂系爭契約（本院卷二第150頁），則盧采葳並非系爭契約...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">72.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPDM%2c110%2c%e8%81%b2%e5%88%a4%2c89%2c20220113%2c1&#39;,&#39;71&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPDM%2c110%2c%e8%81%b2%e5%88%a4%2c89%2c20220113%2c1&#39;,&#39;71&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPDM%2c110%2c%e8%81%b2%e5%88%a4%2c89%2c20220113%2c1&amp;ot=in">臺灣臺北地方法院 110 年度 聲判 字第 89 號刑事裁定</a>（31K）</td>
+                <td>111.01.13</td>
+                <td width="30%">聲請交付審判</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...款，三商公司顯因被告3人之詐欺行為，而受有利益云云。然查，三商公司不願支付部分工程款，係因三商公司自行核算後，認聲請人才德公司尚須<span class="highlight">賠償</span>三商公司款項，此見卷存之仲裁協會案件卷宗之三商公司答辯狀內容即明，足認三商公司主觀上並非故意不支付價金，況三商公司對聲請人才德公司...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">73.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPDV%2c108%2c%e5%bb%ba%2c352%2c20220107%2c1&#39;,&#39;72&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPDV%2c108%2c%e5%bb%ba%2c352%2c20220107%2c1&#39;,&#39;72&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPDV%2c108%2c%e5%bb%ba%2c352%2c20220107%2c1&amp;ot=in">臺灣臺北地方法院 108 年度 建 字第 352 號民事判決</a>（34K）</td>
+                <td>111.01.07</td>
+                <td width="30%">損害賠償</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...主張依民法第227條第1項、第231條第1項、第260條、第503條規定，以及依系爭合約第11條第2款、第6條等約款，請求竹榮公司<span class="highlight">賠償</span>1264萬6516元及利息，皆無理由，不應准許。另竹榮公司反訴主張依系爭合約承攬關係及民法第511條、第490條、第491條規定，...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">74.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TCDV%2c110%2c%e5%bb%ba%e6%9b%b4%e4%b8%80%2c1%2c20211230%2c1&#39;,&#39;73&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TCDV%2c110%2c%e5%bb%ba%e6%9b%b4%e4%b8%80%2c1%2c20211230%2c1&#39;,&#39;73&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TCDV%2c110%2c%e5%bb%ba%e6%9b%b4%e4%b8%80%2c1%2c20211230%2c1&amp;ot=in">臺灣臺中地方法院 110 年度 建更一 字第 1 號民事判決</a>（41K）</td>
+                <td>110.12.30</td>
+                <td width="30%">給付逾期違約金等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...付違約金。民法第220條第1項、第230條第1項、第250條第1項分有明文。次按「因可歸責於廠商之事由，致機關遭受損害者，廠商應負<span class="highlight">賠償</span>責任。」，系爭契約第18條權利及責任第8項亦有明定。據此，原告得請求逾期違約金，須該給付遲延可歸責被告，倘被告無可歸責事由，原告即...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">75.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;PCDV%2c107%2c%e5%bb%ba%2c2%2c20211221%2c1&#39;,&#39;74&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;PCDV%2c107%2c%e5%bb%ba%2c2%2c20211221%2c1&#39;,&#39;74&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=PCDV%2c107%2c%e5%bb%ba%2c2%2c20211221%2c1&amp;ot=in">臺灣新北地方法院 107 年度 建 字第 2 號民事判決</a>（343K）</td>
+                <td>110.12.21</td>
+                <td width="30%">給付工程款等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...負責賠償。 3.系爭契約第18條第1項第11款：「因可歸責於乙方之事由，致甲方遭受損害者，乙方應負賠償責任，另無需對「所失利益」負<span class="highlight">賠償</span>責任。 貳、得心證之理由：一、兩造不爭執事項：（一）兩造於101年8月22日簽定「鴨母港溝水質及景觀改善工程（萬福橋至抽水站段）」...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">76.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TYDV%2c107%2c%e5%bb%ba%2c70%2c20211126%2c2&#39;,&#39;75&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TYDV%2c107%2c%e5%bb%ba%2c70%2c20211126%2c2&#39;,&#39;75&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TYDV%2c107%2c%e5%bb%ba%2c70%2c20211126%2c2&amp;ot=in">臺灣桃園地方法院 107 年度 建 字第 70 號民事判決</a>（32K）</td>
+                <td>110.11.26</td>
+                <td width="30%">給付承攬報酬等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...，應返還其利益。雖有法律上之原因，而其後已不存在者，亦同，民法第179 條定有明文。次按定作人固得於工作未完成前隨時終止契約，但應<span class="highlight">賠償</span>承攬人因契約終止而生之損害，此觀民法第511 條但書規定即明。又定作人於契約終止前如已超付承攬人完成工作所得受領之報酬，於契約終止...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">77.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TYDV%2c109%2c%e5%bb%ba%2c47%2c20211105%2c2&#39;,&#39;76&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TYDV%2c109%2c%e5%bb%ba%2c47%2c20211105%2c2&#39;,&#39;76&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TYDV%2c109%2c%e5%bb%ba%2c47%2c20211105%2c2&amp;ot=in">臺灣桃園地方法院 109 年度 建 字第 47 號民事判決</a>（31K）</td>
+                <td>110.11.05</td>
+                <td width="30%">給付工程款等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...0 元＋138,400 元）&#215;1.05＝2,140,320 元】；而扣除原告已支付之183 萬4,460 元，再扣除被告得請求原告<span class="highlight">賠償</span>因終止所生之損失37萬4,204 元，其金額為-6萬8,344 元（計算式：2,140,320 元－1,834,460 元－374...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">78.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TCDV%2c109%2c%e5%bb%ba%2c3%2c20211022%2c1&#39;,&#39;77&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TCDV%2c109%2c%e5%bb%ba%2c3%2c20211022%2c1&#39;,&#39;77&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TCDV%2c109%2c%e5%bb%ba%2c3%2c20211022%2c1&amp;ot=in">臺灣臺中地方法院 109 年度 建 字第 3 號民事判決</a>（23K）</td>
+                <td>110.10.22</td>
+                <td width="30%">給付工程款</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...所定之強制罰，故如債務人未依債之關係所定之債務履行時，債權人無論損害有無，皆得請求，且如有損害時，除懲罰性違約金，更得請求其他損害<span class="highlight">賠償</span>（最高法院108年度台上字第568號裁判意旨參照）。㈥又原告遲延期間為108年3月11日至同年4月27日，計47日，扣除「7天雨天...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">79.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TNDV%2c108%2c%e5%bb%ba%2c50%2c20210930%2c1&#39;,&#39;78&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TNDV%2c108%2c%e5%bb%ba%2c50%2c20210930%2c1&#39;,&#39;78&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TNDV%2c108%2c%e5%bb%ba%2c50%2c20210930%2c1&amp;ot=in">臺灣臺南地方法院 108 年度 建 字第 50 號民事判決</a>（25K）</td>
+                <td>110.09.30</td>
+                <td width="30%">請求履行契約等</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...，堪認被告停工確係因混凝土強度不足，為結構安全所為之處置，尚非無故，從而，原告主張依系爭契約第6條第4項請求被告給付延遲完工之損害<span class="highlight">賠償</span>，並非有據。㈥、至加建工程款10萬元部分：經查，被告抗辯兩造係口頭約定由原告委託被告施作5坪增建之工程（但需於領得使用執照後之二次...</span></td>
+            </tr>
+        
+            <tr>
+                <td width="1%" nowrap="nowrap">80.</td>
+                <td><a id="hlTitle" class="hlTitle_scroll" onClick="cookieId(&#39;TPDV%2c106%2c%e5%bb%ba%2c33%2c20210917%2c2&#39;,&#39;79&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" onmousedown="cookieId(&#39;TPDV%2c106%2c%e5%bb%ba%2c33%2c20210917%2c2&#39;,&#39;79&#39;,&#39;e34ca3620c5ff20d0e3654f9c0aea297&#39;,&#39;&#39;,&#39;&#39;,&#39;DS&#39;,&#39;&#39;)" href="data.aspx?ty=JD&amp;id=TPDV%2c106%2c%e5%bb%ba%2c33%2c20210917%2c2&amp;ot=in">臺灣臺北地方法院 106 年度 建 字第 33 號民事判決</a>（55K）</td>
+                <td>110.09.17</td>
+                <td width="30%">給付工程款</td>
+            </tr>
+            <tr class="summary">
+                <th id="jud-s"></th>
+                <td colspan="3" headers="jud-s"><span class="tdCut">...拆除重作一切費用及損失應由原告負擔；顯非約定模板工程施作後，澆置完成之混凝土若有瑕疵，該瑕疵係因模板工程施作之瑕疵所致者，應負損害<span class="highlight">賠償</span>之責任。而被告所主張電梯機坑漏水、地下室外牆漏水等，均屬混凝土澆置完成後所生瑕疵之問題，並非模板組立錯誤之問題，是被告所主張電梯機...</span></td>
+            </tr>
+        </table>
+        <div class="list-pager">
+        
+<script type="text/javascript">
+    function GoPage(ddl) {
+        location.href = ddl.value;
+    }
+</script>
+<div id="plPager" class="pull-right">
+	
+	<span>共 731 筆 . 現在第 4 / 37 頁</span>
+    <span>
+	    <a id="hlFirst" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=1">第一頁</a>
+        <a id="hlPriv" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=3">上一頁</a>
+        <a id="hlNext" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=5">下一頁</a>
+        <a id="hlLast" class="page" href="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;page=37">最末頁</a>
+	跳至
+        <select name="ctl00$cp_content$ucPagerButtom$ddlPage" id="ddlPage" class="btn btn-default btn-xs" onchange="GoPage(this)">
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=1">1</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=2">2</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=3">3</option>
+		<option selected="selected" value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=4">4</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=5">5</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=6">6</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=7">7</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=8">8</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=9">9</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=10">10</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=11">11</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=12">12</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=13">13</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=14">14</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=15">15</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=16">16</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=17">17</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=18">18</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=19">19</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=20">20</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=21">21</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=22">22</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=23">23</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=24">24</option>
+		<option value="/FJUD/qryresultlst.aspx?q=e34ca3620c5ff20d0e3654f9c0aea297&amp;sort=DS&amp;&amp;Page=25">25</option>
+
+	</select>
+頁
+    </span>
+
+</div>
+<div class="clearfix"></div>
+        </div>
+    </div>
+
+    </div>
+    </form>
+</body>
+</html>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/iframeautohight.js"></script>
+<script type="text/javascript" src="/js/functions.js"></script>
+<script>
+    $(".hlTitle_scroll").click(function () {
+        var expires = new Date();
+        //有效時間保存 3分鐘 3*60*1000
+        expires.setTime(expires.getTime() + 180000);
+        var scroll = parent.document.documentElement.scrollTop;
+        document.cookie = "yPos=!~" + scroll + "~!" + ";expires=" + expires.toGMTString() + ";path=/";
+    });
+
+    $(function () {
+        if (!!window.performance && window.performance.navigation.type === 2) {
+            //!! 用來檢查 window.performance 是否存在
+            //window.performance.navigation.type ===2 表示使用 back or forward
+            var strCook = document.cookie;
+            if (strCook.indexOf("!~") != 0) {
+                var intS = strCook.indexOf("!~");
+                var intE = strCook.indexOf("~!");
+                var strPos = strCook.substring(intS + 2, intE);
+                top.$("body,html").animate({ scrollTop: strPos }, 0);
+                document.cookie = "";
+            }
+        }
+        else
+        {
+            //iframe換頁後，必須至頂
+            if (parent.document.documentElement.scrollTop != 0) { top.$("body,html").animate({ scrollTop: 0 }, 0); }
+        }
+        //避免XFS攻擊
+        if (top.location.hostname != self.location.hostname) { top.location = self.location; }
+        //如果法規放在iframe裡，那Master要改用iframe.master
+        if ($("#iframe-data", window.parent.document) != undefined) {
+            var queryVars = { 'ot': 'in' };
+         
+            $("a:not(.eng)").each(function (index) {
+                var url = $(this).attr("href");
+                var target = $(this).attr("target");
+                /*
+                if (url.indexOf("https://cons-test.judicial.gov.tw/") >= 0)
+                {
+                    return;
+                }
+                */
+                try {
+                    if (url != undefined && url.substring(0, 1) != "#" && target != "_blank" && target != "_parent") {
+                        if (url.indexOf('ot=in') == -1) {
+                            var separator = url.indexOf('?') !== -1 ? "&" : "?";
+                            url = url + separator + "ot=in";
+                            $(this).attr("href", url);
+                        }
+                    }
+                } catch (err) {
+                    alert(err.message);
+                }
+            });
+        }
+    });
+</script>
+
+    <script>
+        var ShortMemo = "1";
+        //排序
+        //var ty = getUrlParameter("ty");
+        var gy = getUrlParameter("gy");
+        var gc = getUrlParameter("gc");
+        //var qUrl = "&ty=" + ty + "&gy=" + gy + "&gc=" + gc + "&q=e34ca3620c5ff20d0e3654f9c0aea297";
+        var qUrl = "&gy=" + gy + "&gc=" + gc + "&q=e34ca3620c5ff20d0e3654f9c0aea297";
+
+        $(".dropdown-menu a").on("click", function (e) {
+            e.preventDefault();
+            window.location.href = $(this).attr("href") + qUrl;
+        });
+
+        $(function () {
+            if (document.cookie.indexOf("showcut=1") > -1) {
+                $(".tdCut").hide();
+                ShortMemo = "0";
+                $("#closeCut").text("顯示摘要");
+            }
+            else {
+                $(".tdCut").show();
+                ShortMemo = "1";
+                $("#closeCut").text("隱藏摘要");
+                document.cookie = "showcut=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ";path=/";
+            }
+        });
+
+        $("#closeCut").click(function () {
+            if (ShortMemo == "1") {
+                var d = new Date();
+                d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));//保存1個月
+                var expires = "expires=" + d.toGMTString();
+                //加入cookie
+                document.cookie = "showcut=1; expires=" + expires + ";path=/";
+                $(".tdCut").hide();
+                ShortMemo = "0";
+                $("#closeCut").text("顯示摘要");
+            }
+            else {
+                $(".tdCut").show();
+                ShortMemo = "1";
+                $("#closeCut").text("隱藏摘要");
+                document.cookie = "showcut=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ";path=/";
+            }
+        });
+    </script>
