@@ -7,6 +7,10 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import csv
 
+
+DEBUG = False
+
+
 def fetch_page(url, data=None):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
@@ -115,8 +119,9 @@ def main():
         print("Failed to fetch the iframe content.")
         return
 
-    with open('debug_iframe_content.html', 'w', encoding='utf-8') as file:
-        file.write(current_page_content)
+    if DEBUG:
+        with open('debug_iframe_content.html', 'w', encoding='utf-8') as file:
+            file.write(current_page_content)
 
     fetched_count = 0
     page_number = 1
