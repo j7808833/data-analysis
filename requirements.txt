@@ -5,3 +5,4 @@ jieba
 sweetviz
 tpot
 shap
+setuptools
