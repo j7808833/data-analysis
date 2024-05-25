@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import shap
 
 # 数据读取
-file_path = "top_20_words_per_line.csv"
+file_path = "updated_keyword_counts_per_line.csv"
 data = pd.read_csv(file_path)
 
 # 数据预处理
@@ -22,12 +22,12 @@ report.show_html("report.html")
 
 # 处理名义变量
 nominal_columns = [
-    '上訴', '被告', '契約', '工程', '原告', '系爭', '本院', '請求', '條第', '給付', '公司', '施工', '部分', '萬元', '品質計畫書', '品質成果報告書', '計罰', '扣法', '總額預定', '非賠償總額預定'
+    '計罰', '總額預定'
 ]
 data = pd.get_dummies(data, columns=nominal_columns)
 
 # 特征选择
-data['Target'] = data['Target'].map({'punitive': 2, 'compensatory': 1, 'notdefine': 0})
+data['Target'] = data['Target'].map({'punitive': 1, 'compensatory': 2, 'notdefine': 0})
 y = data["Target"]
 x = data.drop("Target", axis=1)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
