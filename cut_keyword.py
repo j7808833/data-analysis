@@ -36,7 +36,7 @@ def analyze_txt_to_csv(txt_file, output_csv_file, keywords):
         result_list.append(word_count)
         print(f"Processed line {idx+1}/{len(lines)}")
 
-    result_df = pd.DataFrame(result_list, columns=['id'] + keywords)
+    result_df = pd.DataFrame(result_list, columns=keywords + ['id'])
     result_df.to_csv(output_csv_file, index=False, encoding='utf-8')
     print(f"Results saved to {output_csv_file}")
 
