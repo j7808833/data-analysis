@@ -29,8 +29,8 @@ def get_top_20_words(txt_file):
 
     top_words = jieba.analyse.extract_tags(text, topK=50, withWeight=False)  # 提取多一些詞彙，因為會過濾掉數字
     filtered_words = [word for word in top_words if not re.match(r'^\d+$', word)]
-    filtered_words = filtered_words[:18]  # 留出兩個位置給新增的關鍵詞
-    filtered_words.extend(["品質計畫書", "品質成果報告書"])
+    filtered_words = filtered_words[:16]  # 留出四個位置給新增的關鍵詞
+    filtered_words.extend(["品質計畫書", "品質成果報告書", "計罰", "扣法"])
     return filtered_words
 
 top_words = get_top_20_words(txt_file)
