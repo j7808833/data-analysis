@@ -11,7 +11,7 @@ txt_file = "./combined_fullcontent.txt"
 output_csv_file = "./keyword_counts_per_line.csv"
 
 # 指定要搜尋的關鍵字
-keywords = ["計罰", "總額預定"]
+keywords = ["計罰", "總額預定", "逾期"]
 
 # 將 CSV 檔案的第三欄位內容合併成一個 TXT 檔案
 def save_fullcontent_as_txt(csv_file, txt_file):

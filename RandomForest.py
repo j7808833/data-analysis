@@ -2,6 +2,13 @@ import sweetviz
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import shap
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+import numpy as np
+import matplotlib.pyplot as plt
+from tpot import TPOTClassifier
+from tpot.config import classifier_config_dict
 
 # 数据读取
 file_path = "updated_keyword_counts_per_line.csv"
@@ -21,10 +28,13 @@ report = sweetviz.analyze(data)
 report.show_html("report.html")
 
 # 处理名义变量
-nominal_columns = [
-    '計罰', '總額預定'
-]
-data = pd.get_dummies(data, columns=nominal_columns)
+nominal_columns = ['計罰', '總額預定', '逾期']
+label_encoders = {}
+
+for column in nominal_columns:
+    le = LabelEncoder()
+    data[column] = le.fit_transform(data[column])
+    label_encoders[column] = le
 
 # 特征选择
 data['Target'] = data['Target'].map({'punitive': 1, 'compensatory': 2, 'notdefine': 0})
@@ -33,28 +43,24 @@ x = data.drop("Target", axis=1).drop("id", axis=1)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
 # 随机森林模型训练
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
-
 rf = RandomForestClassifier(n_estimators=100, random_state=42)
 param_grid = {'max_depth': [5, 10, 15], 'min_samples_leaf': [1, 3, 5]}
 grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=3, scoring='f1_weighted', verbose=2)
 grid_search.fit(x_train, y_train)
 best_rf = grid_search.best_estimator_
-rf_model = RandomForestClassifier(n_estimators=100, max_depth=15, min_samples_leaf=1, random_state=42)
+rf_model = RandomForestClassifier(n_estimators=100, max_depth=15, min_samples_leaf=4, random_state=42)
 rf_model.fit(x_train, y_train)
 print(rf_model.score(x_train, y_train))
 print(rf_model.score(x_test, y_test))
 
 # 特征重要性分析
-import numpy as np
-import matplotlib.pyplot as plt
-
 features = x_train.columns
 importances = best_rf.feature_importances_
 indices = np.argsort(importances)[::-1]
 sorted_features = pd.DataFrame({'Features': features[indices], 'Importance': importances[indices]})
 
+plt.rcParams['font.sans-serif'] = ['Arial']  # 使用Arial字體
+plt.rcParams['axes.unicode_minus'] = False    # 解決負號顯示問題
 plt.figure(figsize=(10, 6))
 plt.title('Feature Importances by RandomForest')
 plt.bar(range(len(importances)), importances[indices], color='b', align='center')
@@ -62,7 +68,7 @@ plt.xticks(range(len(importances)), features[indices], rotation=90)
 plt.xlabel('Relative Importance')
 plt.show()
 
-top_features = sorted_features['Features'][:25]
+top_features = sorted_features['Features'][:3]
 x_train_selected = x_train[top_features]
 x_test_selected = x_test[top_features]
 
@@ -72,7 +78,7 @@ grid_search.fit(x_train_selected, y_train)
 print(grid_search.best_params_)
 
 # 训练新的随机森林模型
-rf_1 = RandomForestClassifier(n_estimators=20, max_depth=6, min_samples_leaf=1, random_state=42)
+rf_1 = RandomForestClassifier(n_estimators=20, max_depth=6, min_samples_leaf=4, random_state=42)
 rf_1.fit(x_train, y_train)
 print(rf_1.score(x_train, y_train))
 print(rf_1.score(x_test, y_test))
@@ -80,13 +86,9 @@ print(rf_1.score(x_test, y_test))
 sweetviz.analyze(pd.concat([x_train_selected, y_train], axis=1)).show_html("selected.html")
 
 # TPOT模型训练
-from tpot.config import classifier_config_dict
-
 xgboost_keys = [key for key in classifier_config_dict if ("xgboost" or "gradientboosting") in key.lower()]
 for key in xgboost_keys:
     del classifier_config_dict[key]
-
-from tpot import TPOTClassifier
 
 tpot_new = TPOTClassifier(
     generations=5,
