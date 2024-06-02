@@ -28,7 +28,7 @@ report = sweetviz.analyze(data)
 report.show_html("report.html")
 
 # 处理名义变量
-nominal_columns = ['計罰', '總額預定', '逾期']
+nominal_columns = ['計罰']
 label_encoders = {}
 
 for column in nominal_columns:
@@ -97,7 +97,7 @@ tpot_new = TPOTClassifier(
     scoring='f1_weighted',
     random_state=42,
     config_dict=classifier_config_dict,
-    cv=5,
+    cv=3,
     n_jobs=-1,
 )
 
