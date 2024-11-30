@@ -124,19 +124,19 @@ def main():
             file.write(current_page_content)
 
     fetched_count = 0
-    page_number = 12
+    page_number = 0
     retry_attempts = 3
     retry_wait_time = 10  # 10 seconds
     output_file = 'judgment_data_2.csv'
 
-    while fetched_count < 200:
+    while fetched_count < 500:
         page_data, links = parse_results_page(current_page_content)
         if not page_data or not links:
             print("Failed to parse the results page.")
             break
 
         for index, link in enumerate(links):
-            if fetched_count >= 200:
+            if fetched_count >= 500:
                 break
             detail_url = details_base_url + link
             print(f"Fetching detail page: {detail_url}")
