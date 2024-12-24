@@ -102,7 +102,25 @@ def analyze_content_with_api(content):
     headers = {"Content-Type": "application/json"}
     payload = {
         "contents": [{
-            "parts": [{"text": f"請分析以下內容，判斷是否涉及懲罰性違約金或損害賠償性違約金：{content}"}]
+            "parts": [{"text": (
+                f"以下是一段契約內容，請協助判斷其中內容是懲罰性還是損害賠償性，\n\n"
+                f"分析依據：\n"
+                f"懲罰性 (編號1)：\n"
+                f"1. 涉及刑法或刑事內容。\n"
+                f"2. 提及逾期、額外罰金。\n"
+                f"3. 契約金或債權本金超出實際損害合理比例（損害20%-30%）以上。\n"
+                f"\n"
+                f"損害賠償性(編號2)：\n"
+                f"1. 條款內容提到返還、不當得利返還或程序費用。\n"
+                f"2. 符合合理比例（損害20%-30%）。\n"
+                f"3. 涉及當事方協商的和解金額。\n"
+                f"\n"
+                f"契約金額為第一優先級，契約金額接近於超出實際損害3倍以上，就是判定為懲罰性(編號1)。\n"
+                f"判斷基於資訊不足，即使類似於懲罰性，也無法斷定，就是優先判定為懲罰性(編號1)。\n"
+                f"只要一項類似於懲罰性，即便包含損害賠償性要點，仍然就是優先判定為懲罰性(編號1)。\n"
+                f"若無法確定，請務必選擇最接近的分類：1 或 2，不允許未知分類。\n\n"
+                f"內容如下：\n{content}"
+            )}]
         }]
     }
     try:
@@ -112,18 +130,20 @@ def analyze_content_with_api(content):
 
         if 'candidates' in result and len(result['candidates']) > 0:
             analyzed_text = result['candidates'][0]['content']['parts'][0]['text']
-            if "懲罰性違約金" in analyzed_text:
-                return "懲罰性違約金"
-            elif "損害賠償性違約金" in analyzed_text:
-                return "損害賠償性違約金"
-            elif "未提及違約金" in analyzed_text:
-                return "未提及違約金"
-            else:
-                return "未知分類"
-        return "未提及違約金"
+            return refined_classification(content, analyzed_text)
+        return "損害賠償性"  # 預設返回損害賠償性
     except requests.exceptions.RequestException as e:
         print(f"API 呼叫失敗: {e}")
-        return "分析失敗"
+        return "損害賠償性"  # 預設返回損害賠償性
+
+# 進一步細化分類
+def refined_classification(content, initial_classification):
+    """
+    通過文本特徵進一步細化的分類。
+    """
+    if any(keyword in content for keyword in ["刑法", "刑事", "額外"]):
+        return "懲罰性"
+    return initial_classification
 
 # 將案件類型映射為數字代碼
 def map_case_type_to_code(case_type):
@@ -131,13 +151,10 @@ def map_case_type_to_code(case_type):
     將案件類型轉換為對應的數字代碼。
     """
     case_type_mapping = {
-        "懲罰性違約金": 1,
-        "損害賠償性違約金": 2,
-        "未提及違約金": 3,
-        "未知分類": 4,
-        "分析失敗": 0
+        "懲罰性": 1,
+        "損害賠償性": 2,
     }
-    return case_type_mapping.get(case_type, 0)
+    return case_type_mapping.get(case_type, 2)  # 預設為損害賠償性
 
 # 儲存案件資料到 judgment_data_analysis.csv
 def save_to_csv(data, filename):
@@ -165,6 +182,7 @@ def save_to_target_csv(case_type_code, filename):
             writer.writerow([case_type_code])
     except Exception as e:
         print(f"Target.csv 寫入失敗: {e}")
+
 
 # 主函式
 def main():
@@ -215,12 +233,12 @@ def main():
         writer = csv.writer(file)
         writer.writerow(['Target'])
 
-    while fetched_count < 500:
+    while fetched_count < 450:
         page_data, links = parse_results_page(current_page_content)
         if not page_data or not links:
             break
         for index, link in enumerate(links):
-            if fetched_count >= 500:
+            if fetched_count >= 450:
                 break
             detail_url = f"{details_base_url}{link}"
             detail_content = fetch_page(detail_url)
@@ -231,7 +249,7 @@ def main():
             judgment_date = extract_judgment_date(detail_content)
             analysis_result = analyze_content_with_api(full_content)
             case_type_code = map_case_type_to_code(analysis_result)
-            
+
             case_data = {
                 '序號': fetched_count + 1,
                 '案件名稱': page_data[index]['Title'],
@@ -243,9 +261,9 @@ def main():
             save_to_csv(case_data, output_file)
             save_to_target_csv(case_type_code, target_file)  # 同步寫入 Target.csv
             fetched_count += 1
+
+        print(f"完成第 {page_number} 頁資料爬取，共計 {fetched_count} 筆資料...")
         page_number += 1
-        next_page_full_url = search_url_template.format(page=page_number)
-        current_page_content = fetch_page(next_page_full_url)
 
 if __name__ == '__main__':
     main()
