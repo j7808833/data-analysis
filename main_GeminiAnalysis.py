@@ -113,9 +113,7 @@ def analyze_content_with_api(content):
                 f"1. 條款內容提到返還、不當得利返還或程序費用，且沒有提及額外罰金。\n"
                 f"2. 符合合理比例（損害20%-30%），且完全無超過30%以上。\n"
                 f"3. 涉及當事方協商的和解金額，且沒有涉及刑法或刑事內容。\n\n"
-                f"契約金額為第一優先級，契約金額接近於超出實際損害3倍以上，就是判定為懲罰性(編號1)。\n"
-                f"契約內容只要一項符合懲罰性，就是優先判定為懲罰性(編號1)。\n"
-                f"契約內容若無法確定，請務必選擇最接近的分類：(編號1)或(編號2)，不允許未知分類。\n\n"
+                f"契約內容若無法確定，請務必選擇最接近的分類：**懲罰性(編號1)**或**損害賠償性(編號2)**，不允許未知分類。\n\n"
                 f"內容如下：\n{content}"
             )}]
         }]
@@ -127,31 +125,31 @@ def analyze_content_with_api(content):
         if 'candidates' in result and len(result['candidates']) > 0:
             analyzed_text = result['candidates'][0]['content']['parts'][0]['text']
             return refined_classification(content, analyzed_text)
-        return "損害賠償性 (編號2)"
+        return "**損害賠償性(編號2)**"
     except requests.exceptions.RequestException as e:
         print(f"API 呼叫失敗: {e}")
-        return "損害賠償性 (編號2)"
+        return "**損害賠償性(編號2)**"
 
 # 進一步細化分類
 def refined_classification(content, initial_classification):
     """
-    通過文本特徵進一步細化的分類，優先判定為懲罰性。
+    通過文本特徵進一步細化的分類，優先判定為**懲罰性(編號1)**。
     """
     # 強化懲罰性條件：即使沒有刑法或刑事條文，只要提到逾期、罰金等，仍然判定為懲罰性
-    if any(keyword in content for keyword in ["判定為懲罰性"]):
-        return "懲罰性 (編號1)"
+    if any(keyword in content for keyword in ["判定為**懲罰性(編號1)**"]):
+        return "**懲罰性(編號1)**"
     return initial_classification
 
 # 將案件類型映射為數字代碼
 def map_case_type_to_code(case_type):
     """
     將案件類型文字描述轉換為對應的數字代碼：
-    懲罰性 (編號1) => 1, 損害賠償性 (編號2) => 2
+    **損害賠償性(編號2)** => 2, **懲罰性(編號1)** => 1
     """
-    if "(編號1)" in case_type:
-        return 1
-    elif "(編號2)" in case_type:
+    if "**損害賠償性(編號2)**" in case_type:
         return 2
+    elif "**懲罰性(編號1)**" in case_type:
+        return 1
     return 0
 
 # 儲存案件資料到 judgment_data_analysis.csv
