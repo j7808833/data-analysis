@@ -1,4 +1,3 @@
-import requests
 from bs4 import BeautifulSoup
 import time
 import random
@@ -6,6 +5,7 @@ import csv
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import re
+import requests  # 匯入 requests 模組
 
 # API 金鑰與 API URL 配置
 GEMINI_API_KEY = "AIzaSyD_bkUIDtfzwqU5O4lgbP_9ugOrS9iZaqw"
@@ -107,18 +107,15 @@ def analyze_content_with_api(content):
                 f"分析依據：\n"
                 f"懲罰性 (編號1)：\n"
                 f"1. 涉及刑法或刑事內容。\n"
-                f"2. 提及逾期、額外罰金。\n"
-                f"3. 契約金或債權本金超出實際損害合理比例（損害20%-30%）以上。\n"
-                f"\n"
+                f"2. 提及額外罰金。\n"
+                f"3. 契約金或債權本金超出實際損害合理比例（損害20%-30%）以上。\n\n"
                 f"損害賠償性(編號2)：\n"
-                f"1. 條款內容提到返還、不當得利返還或程序費用。\n"
-                f"2. 符合合理比例（損害20%-30%）。\n"
-                f"3. 涉及當事方協商的和解金額。\n"
-                f"\n"
+                f"1. 條款內容提到返還、不當得利返還或程序費用，且沒有提及額外罰金。\n"
+                f"2. 符合合理比例（損害20%-30%），且完全無超過30%以上。\n"
+                f"3. 涉及當事方協商的和解金額，且沒有涉及刑法或刑事內容。\n\n"
                 f"契約金額為第一優先級，契約金額接近於超出實際損害3倍以上，就是判定為懲罰性(編號1)。\n"
-                f"判斷基於資訊不足，即使類似於懲罰性，也無法斷定，就是優先判定為懲罰性(編號1)。\n"
-                f"只要一項類似於懲罰性，即便包含損害賠償性要點，仍然就是優先判定為懲罰性(編號1)。\n"
-                f"若無法確定，請務必選擇最接近的分類：1 或 2，不允許未知分類。\n\n"
+                f"契約內容只要一項符合懲罰性，就是優先判定為懲罰性(編號1)。\n"
+                f"契約內容若無法確定，請務必選擇最接近的分類：(編號1)或(編號2)，不允許未知分類。\n\n"
                 f"內容如下：\n{content}"
             )}]
         }]
@@ -127,41 +124,42 @@ def analyze_content_with_api(content):
         response = requests.post(API_URL, params={'key': GEMINI_API_KEY}, json=payload, headers=headers)
         response.raise_for_status()
         result = response.json()
-
         if 'candidates' in result and len(result['candidates']) > 0:
             analyzed_text = result['candidates'][0]['content']['parts'][0]['text']
             return refined_classification(content, analyzed_text)
-        return "損害賠償性"  # 預設返回損害賠償性
+        return "損害賠償性 (編號2)"
     except requests.exceptions.RequestException as e:
         print(f"API 呼叫失敗: {e}")
-        return "損害賠償性"  # 預設返回損害賠償性
+        return "損害賠償性 (編號2)"
 
 # 進一步細化分類
 def refined_classification(content, initial_classification):
     """
-    通過文本特徵進一步細化的分類。
+    通過文本特徵進一步細化的分類，優先判定為懲罰性。
     """
-    if any(keyword in content for keyword in ["刑法", "刑事", "額外"]):
-        return "懲罰性"
+    # 強化懲罰性條件：即使沒有刑法或刑事條文，只要提到逾期、罰金等，仍然判定為懲罰性
+    if any(keyword in content for keyword in ["判定為懲罰性"]):
+        return "懲罰性 (編號1)"
     return initial_classification
 
 # 將案件類型映射為數字代碼
 def map_case_type_to_code(case_type):
     """
-    將案件類型轉換為對應的數字代碼。
+    將案件類型文字描述轉換為對應的數字代碼：
+    懲罰性 (編號1) => 1, 損害賠償性 (編號2) => 2
     """
-    case_type_mapping = {
-        "懲罰性": 1,
-        "損害賠償性": 2,
-    }
-    return case_type_mapping.get(case_type, 2)  # 預設為損害賠償性
+    if "(編號1)" in case_type:
+        return 1
+    elif "(編號2)" in case_type:
+        return 2
+    return 0
 
 # 儲存案件資料到 judgment_data_analysis.csv
 def save_to_csv(data, filename):
     """
-    保存案件資料到 judgment_data_analysis.csv 文件。
+    保存案件資料到 CSV 文件，包含新增的「最終違約金類型」欄位。
     """
-    fieldnames = ['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '案件類型數字']
+    fieldnames = ['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '最終違約金類型', '案件類型數字']
     try:
         with open(filename, mode='a', newline='', encoding='utf-8-sig') as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -183,15 +181,17 @@ def save_to_target_csv(case_type_code, filename):
     except Exception as e:
         print(f"Target.csv 寫入失敗: {e}")
 
-
 # 主函式
 def main():
     """
-    主函式，處理資料爬取、自動化生成 judgment_data_analysis.csv 和 Target.csv。
+    主函式，負責爬取資料並將結果儲存至 CSV 檔案。
     """
     base_url = 'https://judgment.judicial.gov.tw/FJUD/default.aspx'
     details_base_url = 'https://judgment.judicial.gov.tw/FJUD/'
-    search_url_template = 'https://judgment.judicial.gov.tw/FJUD/qryresultlst.aspx?q=dbd2b7b8c6282852972ea728025a1297&sort=DS&page={page}&ot=in'
+    # search_url_template 變數在此整合範例中未使用，但可保留以防未來需要
+
+    output_file = 'judgment_data_analysis.csv'
+    target_file = 'Target.csv'
 
     initial_content = fetch_page(base_url)
     if not initial_content:
@@ -222,16 +222,14 @@ def main():
 
     fetched_count = 0
     page_number = 0
-    output_file = 'judgment_data_analysis.csv'
-    target_file = 'Target.csv'
 
-    # 初始化 CSV 文件（覆蓋舊文件）
+    # 初始化 CSV 文件（覆蓋舊文件），使用新增的欄位
     with open(output_file, mode='w', newline='', encoding='utf-8-sig') as file:
-        writer = csv.DictWriter(file, fieldnames=['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '案件類型數字'])
+        writer = csv.DictWriter(file, fieldnames=['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '最終違約金類型', '案件類型數字'])
         writer.writeheader()
     with open(target_file, mode='w', newline='', encoding='utf-8-sig') as file:
         writer = csv.writer(file)
-        writer.writerow(['Target'])
+        writer.writerow(['案件類型數字'])
 
     while fetched_count < 450:
         page_data, links = parse_results_page(current_page_content)
@@ -247,19 +245,21 @@ def main():
             full_content = clean_content(detail_content)
 
             judgment_date = extract_judgment_date(detail_content)
-            analysis_result = analyze_content_with_api(full_content)
-            case_type_code = map_case_type_to_code(analysis_result)
+            # 呼叫 API 分析內容，獲取最終分類結果
+            final_type = analyze_content_with_api(full_content)
+            case_type_code = map_case_type_to_code(final_type)
 
             case_data = {
                 '序號': fetched_count + 1,
                 '案件名稱': page_data[index]['Title'],
                 '裁判日期': judgment_date,
                 '裁判案由': page_data[index]['SecondColumn'],
-                '違約金類型': analysis_result,
+                '違約金類型': final_type,           # 使用分析結果作為違約金類型
+                '最終違約金類型': final_type,       # 最終違約金類型與分析結果相同
                 '案件類型數字': case_type_code
             }
             save_to_csv(case_data, output_file)
-            save_to_target_csv(case_type_code, target_file)  # 同步寫入 Target.csv
+            save_to_target_csv(case_type_code, target_file)  # 將案件類型數字寫入 Target.csv
             fetched_count += 1
 
         print(f"完成第 {page_number} 頁資料爬取，共計 {fetched_count} 筆資料...")
