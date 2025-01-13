@@ -103,17 +103,21 @@ def analyze_content_with_api(content):
     payload = {
         "contents": [{
             "parts": [{"text": (
-                f"以下是一段契約內容，請協助判斷其中內容是懲罰性還是損害賠償性，\n\n"
+                f"以下是一段契約內容，請協助判斷其中內容是**懲罰性編號1**還是**損害賠償性編號2**，\n\n"
                 f"分析依據：\n"
-                f"懲罰性 (編號1)：\n"
-                f"1. 涉及刑法或刑事內容。\n"
-                f"2. 提及額外罰金。\n"
-                f"3. 契約金或債權本金超出實際損害合理比例（損害20%-30%）以上。\n\n"
-                f"損害賠償性(編號2)：\n"
-                f"1. 條款內容提到返還、不當得利返還或程序費用，且沒有提及額外罰金。\n"
-                f"2. 符合合理比例（損害20%-30%），且完全無超過30%以上。\n"
-                f"3. 涉及當事方協商的和解金額，且沒有涉及刑法或刑事內容。\n\n"
-                f"契約內容若無法確定，請務必選擇最接近的分類：**懲罰性(編號1)**或**損害賠償性(編號2)**，不允許未知分類。\n\n"
+                f"**懲罰性編號1**\n"
+                f"1. 為了對違約方進行懲罰，通常超過實際損失的範圍，並無與具體損失掛鉤。\n"
+                f"2. 提及額外罰金，且這些罰金無法與實際損失相對應，則屬於懲罰性違約金。\n"
+                f"3. 金額遠超過實際損害的合理比例（通常超過損害的30%），此類設定是對違約行為的額外懲罰，而非對實際損失的補償。\n"
+                f"4. 無法直接與實際損失或費用相連結，金額通常是預設的固定數額或按契約條款預定的比例計算。\n"
+                f"5. 伴隨強制執行條款，用以迫使違約方履行契約或承擔額外的經濟責任。\n\n"
+                f"**損害賠償性編號2**\n"
+                f"1. 補償由違約行為所造成的實際損失。其金額通常不超過損失的30%，以合理比例反映實際損失。\n"
+                f"2. 返還款項、不當得利返還或程序費用，且未提及額外罰金或懲罰性條款。\n"
+                f"3. 基於實際損害設定，金額通常不會超過損害的30%。若金額過高，則需進一步檢視其是否合理。\n"
+                f"4. 若契約中涉及雙方協商的和解金額，且金額與實際損失相符，則屬於損害賠償性。\n"
+                f"5. 若金額設定目的是賠償由違約行為引起的實際損失，而非對違約方進行懲罰。\n\n"
+                f"契約內容若無法確定，請務必選擇最接近的分類：**懲罰性編號1**或**損害賠償性編號2**，不允許未知分類。\n\n"
                 f"內容如下：\n{content}"
             )}]
         }]
@@ -125,30 +129,36 @@ def analyze_content_with_api(content):
         if 'candidates' in result and len(result['candidates']) > 0:
             analyzed_text = result['candidates'][0]['content']['parts'][0]['text']
             return refined_classification(content, analyzed_text)
-        return "**損害賠償性(編號2)**"
+        return "**損害賠償性編號2**"
     except requests.exceptions.RequestException as e:
         print(f"API 呼叫失敗: {e}")
-        return "**損害賠償性(編號2)**"
+        return "**損害賠償性編號2**"
 
 # 進一步細化分類
 def refined_classification(content, initial_classification):
     """
-    通過文本特徵進一步細化的分類，優先判定為**懲罰性(編號1)**。
+    通過文本特徵進一步細化的分類，優先判定為**懲罰性編號1**。
     """
     # 強化懲罰性條件：即使沒有刑法或刑事條文，只要提到逾期、罰金等，仍然判定為懲罰性
-    if any(keyword in content for keyword in ["判定為**懲罰性(編號1)**"]):
-        return "**懲罰性(編號1)**"
+    if any(keyword in content for keyword in ["判定為**懲罰性編號1**"]):
+        return "**懲罰性編號1**"
     return initial_classification
 
 # 將案件類型映射為數字代碼
 def map_case_type_to_code(case_type):
     """
     將案件類型文字描述轉換為對應的數字代碼：
-    **損害賠償性(編號2)** => 2, **懲罰性(編號1)** => 1
+    **損害賠償性編號2** => 2, **懲罰性編號1** => 1
     """
-    if "**損害賠償性(編號2)**" in case_type:
+    if ("損害賠償性編號2**" in case_type or 
+        "損害賠償性編號2" in case_type or 
+        "編號2：損害賠償性" in case_type or 
+        "編號2 損害賠償性" in case_type):
         return 2
-    elif "**懲罰性(編號1)**" in case_type:
+    elif ("懲罰性編號1**" in case_type or 
+          "懲罰性編號1" in case_type or 
+          "編號1：懲罰性" in case_type or 
+          "編號1 懲罰性" in case_type):
         return 1
     return 0
 
@@ -157,7 +167,7 @@ def save_to_csv(data, filename):
     """
     保存案件資料到 CSV 文件，包含新增的「最終違約金類型」欄位。
     """
-    fieldnames = ['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '最終違約金類型', '案件類型數字']
+    fieldnames = ['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '最終違約金類型', 'Target']
     try:
         with open(filename, mode='a', newline='', encoding='utf-8-sig') as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -223,18 +233,18 @@ def main():
 
     # 初始化 CSV 文件（覆蓋舊文件），使用新增的欄位
     with open(output_file, mode='w', newline='', encoding='utf-8-sig') as file:
-        writer = csv.DictWriter(file, fieldnames=['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '最終違約金類型', '案件類型數字'])
+        writer = csv.DictWriter(file, fieldnames=['序號', '案件名稱', '裁判日期', '裁判案由', '違約金類型', '最終違約金類型', 'Target'])
         writer.writeheader()
     with open(target_file, mode='w', newline='', encoding='utf-8-sig') as file:
         writer = csv.writer(file)
-        writer.writerow(['案件類型數字'])
+        writer.writerow(['Target'])
 
-    while fetched_count < 450:
+    while fetched_count < 400:
         page_data, links = parse_results_page(current_page_content)
         if not page_data or not links:
             break
         for index, link in enumerate(links):
-            if fetched_count >= 450:
+            if fetched_count >= 400:
                 break
             detail_url = f"{details_base_url}{link}"
             detail_content = fetch_page(detail_url)
@@ -254,7 +264,7 @@ def main():
                 '裁判案由': page_data[index]['SecondColumn'],
                 '違約金類型': final_type,           # 使用分析結果作為違約金類型
                 '最終違約金類型': final_type,       # 最終違約金類型與分析結果相同
-                '案件類型數字': case_type_code
+                'Target': case_type_code
             }
             save_to_csv(case_data, output_file)
             save_to_target_csv(case_type_code, target_file)  # 將案件類型數字寫入 Target.csv
